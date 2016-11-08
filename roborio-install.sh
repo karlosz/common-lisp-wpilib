@@ -36,7 +36,6 @@ if [ "$@" ]; then
     exit 1
 fi
 
-sftp -oPort=$PORT $HOST << EOF
-put -r $DIR
-exit
-EOF
+BOTDIR=${DIR##*/}
+ssh -p$PORT $HOST "rm -rf $BOTDIR"
+scp -rpq -P$PORT $DIR $HOST:$BOTDIR
