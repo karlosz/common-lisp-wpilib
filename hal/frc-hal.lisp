@@ -6,3 +6,6 @@
   (t (:default "libHALAthena")))
 
 (use-foreign-library libhalathena)
+
+(defcfun (hal-initialize "HALInitialize") :int
+  (mode :int))
