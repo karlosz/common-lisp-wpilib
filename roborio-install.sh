@@ -5,9 +5,10 @@
 ## on the host machine
 
 userhostname="$1"
+port="$2"
+path="$3"
 
-sftp $1 <<EOF
-cd ~
-put -r ../
-quit
+sftp -oPort=$2 $1 <<EOF
+put -r $3
+exit
 EOF
