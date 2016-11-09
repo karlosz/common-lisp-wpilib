@@ -21,7 +21,7 @@
 (defcfun "getDIO" :bool (digital-port-pointer :pointer) (status :pointer :int32))
 
 (defparameter nullptr (make-pointer 0))
-(defvar *status-code-ptr* (foreign-alloc :pointer)))
+(defvar *status-code-ptr* (foreign-alloc :pointer))
 (defvar *dio-ports* (make-array 26 :element-type 'sb-sys:system-area-pointer :initial-element nullptr))
 
 (defun clear-status ()
