@@ -32,8 +32,9 @@
   (unless (<= 0 channel 25)
     (error "Not a port number between 0 and 26."))
   (make-instance 'dio-port :channel channel
-                           :pointer (let ((pointer (initializedigitalport (getport channel) *status-code-ptr*)))
-                                      (allocatedio (aref *dio-ports* channel)
+                           :pointer (let ((pointer (initializedigitalport (getport channel)
+                                                                          *status-code-ptr*)))
+                                      (allocatedio pointer
                                                    (ecase direction
                                                      (:output nil)
                                                      (:input t))
@@ -44,14 +45,13 @@
 (defun read-dio-port (dio-port)
   (unless (eq dio-port-direction :input)
     (error "Not input direction dio-port."))
-  (getdio (dio-port-pointer pointer) *status-code-ptr*))
+  (getdio (dio-port-pointer dio-port) *status-code-ptr*))
 
 (defun set-dio-port (dio-port new-value)
   (unless (eq dio-port-direction :output)
     (error "not output direction dio-port."))
-  (config-dio-port (dio-port-channel channel nil))
-  (setdio port (if new-value 1 0) *status-code-ptr*))
->>>>>>> Unoobify code
+  (config-dio-port (dio-port-channel dio) nil)
+  (setdio dio-port (if new-value 1 0) *status-code-ptr*))
 
 (defun clear-status ()
   (setf (mem-ref *status-code-ptr* :int32) 0))
