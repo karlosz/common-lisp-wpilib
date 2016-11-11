@@ -31,23 +31,25 @@
   "Takes a channel and direction, where input is either :OUTPUT or :INPUT."
   (unless (<= 0 channel 25)
     (error "Not a port number between 0 and 26."))
-  (make-instance 'dio-port :channel channel
-                           :pointer (let ((pointer (initializedigitalport (getport channel)
-                                                                          *status-code-ptr*)))
-                                      (allocatedio pointer
-                                                   (ecase direction
-                                                     (:output nil)
-                                                     (:input t))
-                                                   *status-code-ptr*)
-                                      pointer)
-                           :direction direction))
+  (make-instance 'dio-port
+                 :channel channel
+                 :pointer
+                 (let ((pointer (initializedigitalport (getport channel)
+                                                       *status-code-ptr*)))
+                   (allocatedio pointer
+                                (ecase direction
+                                  (:output nil)
+                                  (:input t))
+                                *status-code-ptr*)
+                   pointer)
+                 :direction direction))
 
 (defun read-dio-port (dio-port)
-  (unless (eq dio-port-direction :input)
+  (unless (eq (dio-port-direction dio-port) :input)
     (error "Not input direction dio-port."))
   (getdio (dio-port-pointer dio-port) *status-code-ptr*))
 
-(defun set-dio-port (dio-port new-value)
+(defun write-dio-port (new-value dio-port)
   (unless (eq dio-port-direction :output)
     (error "not output direction dio-port."))
   (config-dio-port (dio-port-channel dio) nil)
