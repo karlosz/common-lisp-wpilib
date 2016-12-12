@@ -1,8 +1,6 @@
 ## Installing the library onto the roboRIO
 
-Before doing interactive development, install the library onto the roboRIO firtst by running
-`./roborio-install.sh lvuser:hostname port /path/to/common-lisp-wpilib`
-where `hostname` is address of the robot, and `port` is the ssh port. Note that the path MUST be an absolute address (no ~, or ../) because I suck at schell scripting.
+To install wpilib on the robot and keep the library on the robot in sync with an interactive development environment, use `roborio-install.sh`.
 
 ## On the roboRIO
 
