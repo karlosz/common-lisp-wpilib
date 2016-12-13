@@ -7,4 +7,5 @@
   :serial t
   :depends-on (#:cffi)
   :components ((:file "package")
-               (:file "frc-hal")))
+               (:file "functions")
+               (:file "test")))
