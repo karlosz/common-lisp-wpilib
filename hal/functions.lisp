@@ -153,7 +153,9 @@
   (arg0 :pointer))
 
 (cffi:defcfun ("setAccelerometerRange" setAccelerometerRange) :void
-  (arg0 AccelerometerRange))
+  (arg0 :pointer 
+   ;;AccelerometerRange
+   ))
 
 (cffi:defcfun ("getAccelerometerX" getAccelerometerX) :double)
 
@@ -328,7 +330,9 @@
 
 (cffi:defcfun ("getAnalogTriggerOutput" getAnalogTriggerOutput) :pointer
   (analog_trigger_pointer :pointer)
-  (type AnalogTriggerType)
+  (type :pointer 
+   ;;AnalogTriggerType
+   )
   (status :pointer))
 
 ;;; Compressor
@@ -521,7 +525,9 @@
   (status :pointer))
 
 (cffi:defcfun ("initializeCounter" initializeCounter) :pointer
-  (mode Mode)
+  (mode :pointer 
+   ;;Mode
+   )
   (index :pointer)
   (status :pointer))
 
